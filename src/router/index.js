@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { getLocalStorage } from '../utils/helpers'
 
 Vue.use(VueRouter)
 
@@ -7,6 +8,11 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layout/Layout.vue'),
+    // check if not authenticated, redirect to login
+    beforeEnter: (to, from, next) => {
+      if (getLocalStorage('username')) next()
+      else next('/login')
+    },
     children: [
       {
         path: '/',
@@ -17,7 +23,13 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/Login.vue')
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+    // check if authenticated, redirect to home
+    beforeEnter: (to, from, next) => {
+      if (!getLocalStorage('username')) next()
+      else next('/')
+    }
   },
   {
     path: '/error',

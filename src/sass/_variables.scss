@@ -1,0 +1,15 @@
+// Typography
+$font-family-sans-serif: "Open Sans", sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.375;
+
+// Colors
+$primary: #007aff;
+$success: #34c759;
+$warning: #ff9500;
+$danger: #ff3b30;
+$muted: #8e8e93;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";

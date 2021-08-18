@@ -10,6 +10,9 @@ $warning: #ff9500;
 $danger: #ff3b30;
 $muted: #8e8e93;
 
+// Layout
+$header-height: 52px; 
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins/_breakpoints";

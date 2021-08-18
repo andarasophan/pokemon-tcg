@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 col-md-3">
 
-        <div :class="$style.filterCardWrapper">
+        <div :class="[$style.filterCardWrapper, { [$style.showFilterMobile]: showFilterMobile } ]">
           <div class="py-4">
             <filter-card
               inputType="checkbox"
@@ -26,6 +26,9 @@
               :options="sets"
               :loading="gettingSets"
             />
+          </div>
+          <div :class="$style.bottomMenuMobile">
+            <button @click="showFilterMobile = false" class="btn btn-primary">Close</button>
           </div>
         </div>
       </div>
@@ -59,18 +62,23 @@
             />
           </div>
 
-          <p>
-            Showing {{ listCardConfig.totalData }} card(s)
-            <span v-if="Boolean(listCardConfig.search)">
-              for
-              <span class="font-weight-bold"> "{{ listCardConfig.search }}"</span>
-            </span>
-            (
-            <span class="font-weight-bold"> {{ currentPage }} </span>
-            to
-            <span class="font-weight-bold"> {{ Math.ceil(listCardConfig.totalData / 20) ? Math.ceil(listCardConfig.totalData / 20) : 1 }}</span>
-            )
-          </p>
+          <div class="d-flex align-items-center mb-3 justify-content-between">
+            <p class="mb-0 mr-3">
+              Showing {{ listCardConfig.totalData }} card(s)
+              <span v-if="Boolean(listCardConfig.search)">
+                for
+                <span class="font-weight-bold"> "{{ listCardConfig.search }}"</span>
+              </span>
+              (
+              <span class="font-weight-bold"> {{ currentPage }} </span>
+              to
+              <span class="font-weight-bold"> {{ Math.ceil(listCardConfig.totalData / 20) ? Math.ceil(listCardConfig.totalData / 20) : 1 }}</span>
+              )
+            </p>
+            <button :class="$style.filterBtnMobile" class="btn btn-outline-primary rounded-pill" @click="showFilterMobile = true">
+              filter
+            </button>
+          </div>
 
           <b-pagination
             align="center"
@@ -115,7 +123,15 @@ export default {
   name: 'home',
   data () {
     return {
-      search: ''
+      search: '',
+      showFilterMobile: false
+    }
+  },
+  watch: {
+    // watch value showFilterMobile, scroll outside filterCardWrapper will be hidden
+    showFilterMobile (val) {
+      if (val) document.body.classList.add('overflow-hidden')
+      else document.body.classList.remove('overflow-hidden')
     }
   },
   computed: {
@@ -222,5 +238,46 @@ export default {
   overflow: auto;
   position: sticky;
   top: $header-height;
+  background-color: white;
+
+  .bottomMenuMobile {
+    position: sticky;
+    bottom: 0;
+    background-color: $white;
+    z-index: 1;
+    padding: 1rem 0;
+    display: none;
+    justify-content: center;
+    margin: 0 -3rem;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+    border: none;
+    position: fixed !important;
+    top: 0;
+    min-height: 100vh;
+    height: 100%;
+    overflow-y: auto;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    padding: 0 3rem;
+
+    .bottomMenuMobile {
+      display: flex;
+    }
+
+    &.showFilterMobile {
+      display: block;
+    }
+  }
+}
+.filterBtnMobile {
+  display: none;
+
+  @include media-breakpoint-down(sm) {
+    display: block;
+  }
 }
 </style>

@@ -7,3 +7,18 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import '~bootstrap-vue/src/index.scss';
+
+button {
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+  position: relative;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}

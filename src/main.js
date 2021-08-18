@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { BootstrapVue, BIconChevronCompactDown, BIconX } from 'bootstrap-vue'
+import { BootstrapVue, BIconChevronCompactDown, BIconX, BIconChatRightFill } from 'bootstrap-vue'
 import setupAxios from './axios/setupAxios'
 import axios from 'axios'
 
@@ -15,6 +15,7 @@ setupAxios(axios)
 Vue.use(BootstrapVue)
 Vue.component('BIconChevronCompactDown', BIconChevronCompactDown)
 Vue.component('BIconX', BIconX)
+Vue.component('BIconChatRightFill', BIconChatRightFill)
 
 new Vue({
   store,

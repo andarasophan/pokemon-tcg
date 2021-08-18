@@ -59,32 +59,40 @@
             />
           </div>
 
-          <div v-if="!listCardConfig.isLoading">
-            <p>
-              Showing {{ listCardConfig.totalData }} card(s)
-              <span v-if="Boolean(listCardConfig.search)">
-                for
-                <span class="font-weight-bold"> "{{ listCardConfig.search }}"</span>
-              </span>
-              (
-              <span class="font-weight-bold"> {{ currentPage }} </span>
-              to
-              <span class="font-weight-bold"> {{ Math.ceil(listCardConfig.totalData / 20) }}</span>
-              )
-            </p>
-            <b-pagination
-              align="center"
-              v-model="currentPage"
-              :total-rows="listCardConfig.totalData"
-              :per-page="20"
-            />
-          </div>
+          <p>
+            Showing {{ listCardConfig.totalData }} card(s)
+            <span v-if="Boolean(listCardConfig.search)">
+              for
+              <span class="font-weight-bold"> "{{ listCardConfig.search }}"</span>
+            </span>
+            (
+            <span class="font-weight-bold"> {{ currentPage }} </span>
+            to
+            <span class="font-weight-bold"> {{ Math.ceil(listCardConfig.totalData / 20) ? Math.ceil(listCardConfig.totalData / 20) : 1 }}</span>
+            )
+          </p>
+
+          <b-pagination
+            align="center"
+            v-model="currentPage"
+            :total-rows="listCardConfig.totalData"
+            :per-page="20"
+            pills
+          />
 
           <pokemon-card-wrapper
             :pokemons="cards"
-            v-if="!listCardConfig.isLoading"
+            :loading="listCardConfig.isLoading"
           />
-          <p v-else>loading..</p>
+
+          <b-pagination
+            class="mb-0 mt-3"
+            align="center"
+            v-model="currentPage"
+            :total-rows="listCardConfig.totalData"
+            :per-page="20"
+            pills
+          />
         </div>
       </div>
     </div>
@@ -210,5 +218,7 @@ export default {
 .filterCardWrapper {
   height: calc(100vh - #{$header-height});
   overflow: auto;
+  position: sticky;
+  top: $header-height;
 }
 </style>

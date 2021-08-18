@@ -153,8 +153,10 @@ export default {
       // if search empty, cancel submit
       if (!this.search) return
 
+      const newSearch = this.search
+
       this.$store.dispatch(CARDS_LOAD_REQUESTED, {
-        search: this.search,
+        search: newSearch,
         types: this.filters.types,
         rarity: this.filters.rarity,
         set: this.filters.set,
@@ -163,7 +165,7 @@ export default {
         // if success, reset page to firstpage and save search to store
         .then(() => {
           this.$store.commit(SET_LIST_CARDS_CONFIG, { key: 'page', value: 1 })
-          this.$store.commit(SET_LIST_CARDS_CONFIG, { key: 'search', value: this.search })
+          this.$store.commit(SET_LIST_CARDS_CONFIG, { key: 'search', value: newSearch })
         })
         .catch(() => {})
     },

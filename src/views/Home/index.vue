@@ -124,8 +124,8 @@ export default {
       this.$store.dispatch(CARDS_LOAD_REQUESTED, {
         search: this.search,
         types: this.filters.types,
-        rarities: this.filters.rarity,
-        sets: this.filters.set,
+        rarity: this.filters.rarity,
+        set: this.filters.set,
         page: 1
       })
         // if success, reset page to firstpage and save search to store

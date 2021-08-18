@@ -80,9 +80,10 @@
             />
           </div>
 
-          <ul v-if="!listCardConfig.isLoading">
-            <li v-for="card in cards" :key="card.id">{{ card.name }}</li>
-          </ul>
+          <pokemon-card-wrapper
+            :pokemons="cards"
+            v-if="!listCardConfig.isLoading"
+          />
           <p v-else>loading..</p>
         </div>
       </div>
@@ -92,16 +93,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { CARDS_LOAD_REQUESTED, SET_LIST_CARDS_CONFIG, SET_LIST_CARDS_FILTER, SET_PAGE } from '../../store/card.module'
-import { TYPES_LOAD_REQUESTED } from '../../store/type.module'
-import { RARITIES_LOAD_REQUESTED } from '../../store/rarity.module'
-import { SETS_LOAD_REQUESTED } from '../../store/set.module'
-import FilterCard from './FilterCard.vue'
-import SearchBar from './SearchBar.vue'
-import FilterTag from './FilterTag.vue'
+import { CARDS_LOAD_REQUESTED, SET_LIST_CARDS_CONFIG, SET_LIST_CARDS_FILTER, SET_PAGE } from '../store/card.module'
+import { TYPES_LOAD_REQUESTED } from '../store/type.module'
+import { RARITIES_LOAD_REQUESTED } from '../store/rarity.module'
+import { SETS_LOAD_REQUESTED } from '../store/set.module'
+import FilterCard from '../components/FilterCard.vue'
+import SearchBar from '../components/SearchBar.vue'
+import FilterTag from '../components/FilterTag.vue'
+import PokemonCardWrapper from '../components/PokemonCardWrapper.vue'
 
 export default {
-  components: { SearchBar, FilterCard, FilterTag },
+  components: { SearchBar, FilterCard, FilterTag, PokemonCardWrapper },
   name: 'home',
   data () {
     return {

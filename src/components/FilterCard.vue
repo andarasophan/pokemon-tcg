@@ -40,7 +40,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { SET_LIST_CARDS_FILTER } from '../../store/card.module'
+import { SET_LIST_CARDS_FILTER } from '../store/card.module'
 
 export default {
   name: 'FilterCard',

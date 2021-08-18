@@ -25,14 +25,17 @@ const getters = {
 const actions = {
   [RARITIES_LOAD_REQUESTED] ({ commit }) {
     commit(SET_GETTING_RARITIES, true)
-    services.getTypes()
-      .then(({ data: { data } }) => {
-        commit(RARITIES_LOADED, data)
-      })
-      .catch(() => {})
-      .finally(() => {
-        commit(SET_GETTING_RARITIES, false)
-      })
+    return new Promise((resolve, reject) => {
+      services.getRarities()
+        .then(({ data: { data } }) => {
+          commit(RARITIES_LOADED, data)
+          resolve(data)
+        })
+        .catch(err => reject(err))
+        .finally(() => {
+          commit(SET_GETTING_RARITIES, false)
+        })
+    })
   }
 }
 

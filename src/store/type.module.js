@@ -25,14 +25,17 @@ const getters = {
 const actions = {
   [TYPES_LOAD_REQUESTED] ({ commit }) {
     commit(SET_GETTING_TYPES, true)
-    services.getTypes()
-      .then(({ data: { data } }) => {
-        commit(TYPES_LOADED, data)
-      })
-      .catch(() => {})
-      .finally(() => {
-        commit(SET_GETTING_TYPES, false)
-      })
+    return new Promise((resolve, reject) => {
+      services.getTypes()
+        .then(({ data: { data } }) => {
+          commit(TYPES_LOADED, data)
+          resolve(data)
+        })
+        .catch(err => reject(err))
+        .finally(() => {
+          commit(SET_GETTING_TYPES, false)
+        })
+    })
   }
 }
 

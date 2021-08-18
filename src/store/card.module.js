@@ -19,8 +19,8 @@ const state = {
     search: '',
     filters: {
       types: [],
-      rarities: [],
-      sets: []
+      rarity: 'ALL',
+      set: 'ALL'
     }
   }
 }
@@ -40,26 +40,20 @@ const getters = {
 
 const actions = {
   [CARDS_LOAD_REQUESTED] ({ commit }, config) {
-    const { search, types, rarities, sets, page } = config
+    const { search, types, rarity, set, page } = config
     commit(SET_LIST_CARDS_CONFIG, {
       key: 'isLoading',
       value: true
     })
     return new Promise((resolve, reject) => {
       let query = ''
-      if (search) query += `name:${search}*`
+      if (search) query += `name:"*${search}*"`
       if (types.length) {
         const typesQuery = transformToQuery(types, 'types')
         query += `${query ? ' ' : ''}${typesQuery}`
       }
-      if (rarities.length) {
-        const raritiesQuery = transformToQuery(rarities, 'rarities')
-        query += `${query ? ' ' : ''}${raritiesQuery}`
-      }
-      if (sets.length) {
-        const setsQuery = transformToQuery(sets, 'set.id')
-        query += `${query ? ' ' : ''}${setsQuery}`
-      }
+      if (rarity !== 'ALL') query += `${query ? ' ' : ''}rarity:"${rarity}"`
+      if (set !== 'ALL') query += `${query ? ' ' : ''}set.id:"${set}"`
 
       services.getCards({
         query,

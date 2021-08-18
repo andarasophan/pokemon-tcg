@@ -25,14 +25,17 @@ const getters = {
 const actions = {
   [SETS_LOAD_REQUESTED] ({ commit }) {
     commit(SET_GETTING_SETS, true)
-    services.getTypes()
-      .then(({ data: { data } }) => {
-        commit(SETS_LOADED, data)
-      })
-      .catch(() => {})
-      .finally(() => {
-        commit(SET_GETTING_SETS, false)
-      })
+    return new Promise((resolve, reject) => {
+      services.getSets()
+        .then(({ data: { data } }) => {
+          commit(SETS_LOADED, data)
+          resolve(data)
+        })
+        .catch(err => reject(err))
+        .finally(() => {
+          commit(SET_GETTING_SETS, false)
+        })
+    })
   }
 }
 

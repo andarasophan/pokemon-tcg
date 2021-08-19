@@ -1,13 +1,12 @@
 <template>
   <div>
     <!-- data empty -->
-    <div :class="$style.notFound" v-if="!Boolean(pokemons.length) && !loading">
-      <div :class="$style.icon">
-        <b-icon-chat-right-fill/>
-      </div>
-      <h5>Nothing found...</h5>
-      <p>Hmm sorry, we were not able to find a match. Try another search.</p>
-    </div>
+    <error-view
+      v-if="!Boolean(pokemons.length) && !loading"
+      title="Nothing found..."
+      subtitle="Hmm sorry, we were not able to find a match. Try another search."
+    />
+
     <div v-else :class="$style.pokemonCardWrapper">
       <!-- loading -->
       <template v-if="loading">
@@ -26,11 +25,12 @@
 </template>
 
 <script>
+import ErrorView from './ErrorView.vue'
 import PokemonCard from './PokemonCard.vue'
 
 export default {
   name: 'PokemonCardWrapper',
-  components: { PokemonCard },
+  components: { PokemonCard, ErrorView },
   props: {
     pokemons: {
       type: Array,
@@ -53,32 +53,6 @@ export default {
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.notFound {
-  text-align: center;
-  padding: 6rem 0;
-
-  .icon {
-    color: $primary;
-    font-size: 1.5rem;
-    display: inline-flex;
-    padding: 1rem;
-    background-color: $gray-100;
-    border-radius: 100%;
-    margin-bottom: 1.5rem;
-  }
-
-  h5 {
-    font-weight: 700;
-  }
-
-  p {
-    margin-bottom: 0;
-    color: $gray-600;
-    max-width: 300px;
-    margin: auto;
   }
 }
 </style>

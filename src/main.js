@@ -5,6 +5,7 @@ import store from './store'
 import { BootstrapVue, BIconChevronCompactDown, BIconX, BIconChatRightFill, BIconExclamationSquareFill } from 'bootstrap-vue'
 import setupAxios from './axios/setupAxios'
 import axios from 'axios'
+import PortalVue from 'portal-vue'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,9 @@ Vue.component('BIconChevronCompactDown', BIconChevronCompactDown)
 Vue.component('BIconX', BIconX)
 Vue.component('BIconChatRightFill', BIconChatRightFill)
 Vue.component('BIconExclamationSquareFill', BIconExclamationSquareFill)
+
+// use portal-vue
+Vue.use(PortalVue)
 
 new Vue({
   store,

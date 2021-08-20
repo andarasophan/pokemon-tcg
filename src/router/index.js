@@ -17,7 +17,10 @@ const routes = [
       {
         path: '/',
         name: 'Home',
-        component: () => import('@/views/Home')
+        component: () => import('@/views/Home'),
+        meta: {
+          title: 'Pokemon - Home'
+        }
       }
     ]
   },
@@ -25,6 +28,9 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue'),
+    meta: {
+      title: 'Pokemon - Login'
+    },
     // check if authenticated, redirect to home
     beforeEnter: (to, from, next) => {
       if (!getLocalStorage('username')) next()
@@ -34,6 +40,9 @@ const routes = [
   {
     path: '/error',
     name: 'Error',
+    meta: {
+      title: 'Pokemon - Error'
+    },
     component: () => import('@/views/Error.vue')
   },
   {
@@ -46,6 +55,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// set meta title to document each time route changed
+router.afterEach((to) => {
+  document.title = to.meta.title
 })
 
 export default router

@@ -7,6 +7,7 @@ const LIST_RARITY_URL = '/rarities'
 
 const services = {
   getCards: ({ query, page }) => {
+    // limit to 20
     let url = `${LIST_CARD_URL}?pageSize=20`
     if (query) url += `&q=${query}`
     if (page) url += `&page=${page}`

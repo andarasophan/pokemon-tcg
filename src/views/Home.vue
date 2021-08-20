@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-md-3">
+      <div class="col-md-3">
 
         <div :class="[$style.filterCardWrapper, { [$style.showFilterMobile]: showFilterMobile } ]">
           <div class="py-4">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-9">
+      <div class="col-md-9">
         <div class="py-4">
           <search-bar
             class="mb-3"

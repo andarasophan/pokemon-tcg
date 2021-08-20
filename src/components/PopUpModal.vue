@@ -86,8 +86,8 @@ export default {
     z-index: 1;
 
     .popUpModalCard {
-      overflow: hidden;
       background-color: $white;
+      border-radius: 1rem;
     }
   }
 

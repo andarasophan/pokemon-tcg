@@ -12,7 +12,7 @@
             >
               <template #button-content>
                 <span>{{ currentUser }}</span>
-                <b-avatar variant="light" class="ml-2" :text="currentUser[0]" size="2rem"></b-avatar>
+                <b-avatar v-if="currentUser" variant="light" class="ml-2" :text="currentUser[0]" size="2rem"></b-avatar>
               </template>
               <b-dropdown-item @click="logout">Log out</b-dropdown-item>
             </b-dropdown>

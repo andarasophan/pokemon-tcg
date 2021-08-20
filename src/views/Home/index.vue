@@ -41,24 +41,30 @@
             @onSubmit="submitSearch"
           />
 
-          <div class="mb-3">
+          <div class="d-flex align-items-center flex-wrap mb-3">
             <filter-tag
               v-if="filters.set !== 'ALL'"
               :text="filters.set"
               @onClose="setCardFilter('set', 'ALL')"
+              textClass="font-weight-bold text-uppercase"
+              variant="secondary"
+              label="Set"
             />
             <filter-tag
               v-if="filters.rarity !== 'ALL'"
               :text="filters.rarity"
               @onClose="setCardFilter('rarity', 'ALL')"
               variant="primary"
+              textClass="font-weight-bold text-uppercase"
+              label="Rarity"
             />
             <filter-tag
               v-for="(type, i) in filters.types"
               :key="`filterTag-${i}-${type}`"
               :text="type"
-              variant="warning"
               @onClose="setCardFilter('types', filters.types.filter(el => el !== type))"
+              :image="getTypePhoto(type)"
+              label="Type"
             />
           </div>
 
@@ -117,6 +123,7 @@ import FilterCard from './components/FilterCard.vue'
 import SearchBar from './components/SearchBar.vue'
 import FilterTag from './components/FilterTag.vue'
 import PokemonCardWrapper from './components/PokemonCardWrapper'
+import { TypesImage } from '@/utils/enums'
 
 export default {
   components: { SearchBar, FilterCard, FilterTag, PokemonCardWrapper },
@@ -187,6 +194,9 @@ export default {
     },
     setCardFilter (key, value) {
       this.$store.commit(SET_LIST_CARDS_FILTER, { key, value })
+    },
+    getTypePhoto (type) {
+      return TypesImage.getPhotoUrl(type)
     }
   },
   mounted () {

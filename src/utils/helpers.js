@@ -9,7 +9,7 @@ export const destroyLocalStorage = (keyName) => {
 }
 
 export const transformToQuery = (arr, fieldName) => {
-  const result = arr.reduce((acc, cur, i) => acc + `${fieldName}:"${cur}"` + `${i === arr.length - 1 ? '' : ' AND '}`, '')
+  const result = arr.reduce((acc, cur, i) => acc + `${fieldName}:"${cur}"` + `${i === arr.length - 1 ? '' : ' OR '}`, '')
   return arr.length > 1 ? `(${result})` : result
 }
 

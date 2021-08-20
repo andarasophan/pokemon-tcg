@@ -173,9 +173,6 @@ export default {
   },
   methods: {
     submitSearch (e) {
-      // if search empty, cancel submit
-      if (!this.search) return
-
       const newSearch = this.search
 
       this.$store.dispatch(CARDS_LOAD_REQUESTED, {

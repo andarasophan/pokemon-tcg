@@ -1,8 +1,11 @@
-# brankas-vuejs-test
-### [Demo](https://pokemon-by-andara.web.app/)
+# pokemon-tcg
+
+### [Demo](https://pokemon-tcg-by-andara.web.app/)
 
 ## Project setup
+
 - Install dependencies in the local
+
   ```
   npm install
   ```
@@ -14,19 +17,23 @@
   ```
 
 ## Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```
 
 ## Compiles and minifies for production
+
 ```
 npm run build
 ```
 
 ## Lints and fixes files
+
 ```
 npm run lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).

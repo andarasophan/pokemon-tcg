@@ -67,11 +67,11 @@ export default {
   data () {
     return {
       username: {
-        value: '',
+        value: 'Demo',
         dirty: false
       },
       password: {
-        value: '',
+        value: 'demo',
         dirty: false
       },
       isLoading: false
